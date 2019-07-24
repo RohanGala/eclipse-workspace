@@ -22,7 +22,8 @@ public class URLFinder implements Runnable {
 		if (urls != null)
 			for (String l : urls) {
 				try {
-					linkHandler.queueLink(l);
+					if (!linkHandler.visited(l))
+						linkHandler.queueLink(l);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,7 +38,15 @@ public class URLFinder implements Runnable {
 			linkHandler.addVisited(url);
 			List<String> urls = new ArrayList<String>();
 			for (int i = 0; i < 3; i++) {
-				urls.add(new Date().toString());
+				String randomGeneratedUrl = new Date().toString();
+				if (!linkHandler.visited(randomGeneratedUrl))
+					urls.add(randomGeneratedUrl);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			return urls;
 

@@ -36,6 +36,8 @@ public class WebCrawler implements WebCrawlerHandler {
         visitedLinks.add(s);
     }
 
+   
+
     @Override
     public boolean visited(String s) {
         return visitedLinks.contains(s);

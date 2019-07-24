@@ -29,4 +29,7 @@ public interface WebCrawlerHandler {
      * @param link
      */
     void addVisited(String link);
+    
+   
+
 }
