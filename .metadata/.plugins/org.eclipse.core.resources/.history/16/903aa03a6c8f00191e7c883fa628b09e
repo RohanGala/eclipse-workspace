@@ -1,0 +1,14 @@
+
+public class Child extends Base {
+  static void printValue() {
+    System.out.println("  Called static Child method.");
+  }
+  void nonStatPrintValue() {
+    System.out.println("  Called non-static Child method.");
+  }
+  void localIndirectStatMethod() {
+    System.out.println("  Non-static calls own static:");
+    System.out.print("  ");
+    printValue();
+  }
+}
