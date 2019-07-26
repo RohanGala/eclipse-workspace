@@ -1,5 +1,3 @@
-
-//https://www.geeksforgeeks.org/find-number-of-employees-under-every-manager/
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ExecutorService;

@@ -1,3 +1,5 @@
+package com.armyservice.entity;
+
 import java.util.List;
 
 public class Soldier {

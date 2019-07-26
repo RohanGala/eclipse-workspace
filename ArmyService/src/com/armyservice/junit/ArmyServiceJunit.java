@@ -1,3 +1,4 @@
+package com.armyservice.junit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
@@ -6,6 +7,9 @@ import java.io.IOException;
 import java.util.Map.Entry;
 
 import org.junit.jupiter.api.Test;
+
+import com.armyservice.entity.Soldier;
+import com.armyservice.service.ArmyServiceImpl;
 
 public class ArmyServiceJunit {
 
@@ -18,7 +22,7 @@ public class ArmyServiceJunit {
 		//
 
 		try (BufferedReader br = new BufferedReader(
-				new FileReader("/home/ehfl/eclipse-workspace/ArmyService/src/Data.properties"))) {
+				new FileReader("/home/rohangala/Documents/git Java programs/eclipse-workspace/ArmyService/src/com/armyservice/junit/Data.properties"))) {
 			String line = br.readLine();
 
 			while (line != null) {

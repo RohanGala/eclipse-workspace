@@ -1,7 +1,10 @@
+package com.armyservice.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.armyservice.entity.Soldier;
 
 public class ArmyServiceImpl implements ArmyService {
 

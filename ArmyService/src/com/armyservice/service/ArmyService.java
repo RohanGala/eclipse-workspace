@@ -1,3 +1,5 @@
+package com.armyservice.service;
+
 import java.util.List;
 
 public interface ArmyService {
