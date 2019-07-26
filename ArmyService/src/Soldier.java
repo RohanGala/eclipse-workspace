@@ -1,9 +1,11 @@
+import java.util.List;
 
 public class Soldier {
 
 	private int id;
 	private String name;
 	private int supervisorId;
+	private List<Integer> allSubordinates;
 
 	public int getId() {
 		return id;
@@ -28,5 +30,15 @@ public class Soldier {
 	public void setSupervisorId(int supervisorId) {
 		this.supervisorId = supervisorId;
 	}
+
+	public List<Integer> getAllSubordinates() {
+		return allSubordinates;
+	}
+
+	public void setAllSubordinates(List<Integer> allSubordinates) {
+		this.allSubordinates = allSubordinates;
+	}
+	
+	
 
 }

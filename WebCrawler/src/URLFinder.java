@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -38,7 +39,7 @@ public class URLFinder implements Runnable {
 			linkHandler.addVisited(url);
 			List<String> urls = new ArrayList<String>();
 			for (int i = 0; i < 3; i++) {
-				String randomGeneratedUrl = new Date().toString();
+				String randomGeneratedUrl = "htp://www.times"+String.valueOf(Calendar.getInstance().getTimeInMillis())+".com";
 				if (!linkHandler.visited(randomGeneratedUrl))
 					urls.add(randomGeneratedUrl);
 				try {
