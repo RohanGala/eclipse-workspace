@@ -5,14 +5,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.armyservice.entity.Soldier;
 
 public class ArmyServiceImpl implements ArmyService {
 
 	public Map<Integer, Soldier> mngrEmpMap = new HashMap<>();
 
+	private static final Logger log = LoggerFactory.getLogger(ArmyServiceImpl.class);
+	
 	@Override
-	public int add(int id, String name, int supervisorId) throws Exception {
+	public int add(int id, String name, int supervisorId) {
 
 		Soldier soldier = new Soldier();
 		soldier.setSupervisorId(supervisorId);
@@ -22,7 +27,8 @@ public class ArmyServiceImpl implements ArmyService {
 			for (Entry<Integer, Soldier> entry : mngrEmpMap.entrySet()) {
 				Soldier s = entry.getValue();
 				if(s.getSupervisorId() == 0) {
-					throw new Exception("Only one Army General Allowed");
+					log.error("Only one Army General Allowed");
+					return 0;
 				}
 			}
 			
@@ -33,7 +39,8 @@ public class ArmyServiceImpl implements ArmyService {
 				supervisor.setAllSubordinates(new ArrayList<>());
 			supervisor.getAllSubordinates().add(id);
 		} else {
-			throw new Exception("Supervisor Does not exist");
+			log.error("Supervisor Does not exist");
+			return 0;
 		}
 
 		mngrEmpMap.put(id, soldier);
@@ -64,7 +71,7 @@ public class ArmyServiceImpl implements ArmyService {
 	}
 
 	@Override
-	public void remove(int id) throws Exception {
+	public void remove(int id) {
 
 		if (mngrEmpMap.containsKey(id)) {
 			Soldier soldierToBeRemoved = mngrEmpMap.get(id);
@@ -86,7 +93,7 @@ public class ArmyServiceImpl implements ArmyService {
 
 			mngrEmpMap.remove(id);
 		} else {
-			throw new Exception("Soldier Does not exist");
+			log.error("Soldier Does not exist");
 		}
 	}
 

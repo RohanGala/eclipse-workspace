@@ -7,12 +7,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map.Entry;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.armyservice.entity.Soldier;
 import com.armyservice.service.ArmyServiceImpl;
 
 public class ArmyServiceJunit {
@@ -49,7 +46,7 @@ public class ArmyServiceJunit {
 	void addSoldierswithtwoArmyGenerals() throws NumberFormatException, Exception {
 
 		ArmyServiceImpl armyServiceImpl = loadSoldierData();
-		Assertions.assertThrows(Exception.class, () -> armyServiceImpl.add(100, "ROHAN", 0));
+		assertEquals(0, armyServiceImpl.add(100, "ROHAN", 0));
 
 	}
 
@@ -89,14 +86,6 @@ public class ArmyServiceJunit {
 		ArmyServiceImpl armyServiceImpl = loadSoldierData();
 		armyServiceImpl.remove(2);
 		assertEquals(null, armyServiceImpl.get(2));
-
-	}
-
-	@Test
-	void removeSoldierWhichDoesNotExist() throws NumberFormatException, Exception {
-
-		ArmyServiceImpl armyServiceImpl = loadSoldierData();
-		Assertions.assertThrows(Exception.class, () -> armyServiceImpl.remove(90));
 
 	}
 

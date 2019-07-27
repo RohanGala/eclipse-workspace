@@ -3207,3 +3207,22 @@ org.eclipse.core.runtime.CoreException: Cannot determine URI for '/ArmyService/s
 !SUBENTRY 2 org.eclipse.core.filebuffers 4 0 2019-07-26 22:50:10.714
 !MESSAGE Cannot determine URI for '/ArmyService/src/Data.properties'.
 >>>>>>> 5d2503110ec966fae79fc030007e9653399c1745
+!SESSION 2019-07-27 14:19:53.558 -----------------------------------------------
+eclipse.buildId=4.11.0.I20190307-0500
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_IN
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-07-27 14:20:37.188
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.core 1 0 2019-07-27 14:20:44.080
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.jface.text 2 0 2019-07-27 14:20:57.692
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+
+!ENTRY org.eclipse.jface.text 2 0 2019-07-27 14:37:56.283
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
