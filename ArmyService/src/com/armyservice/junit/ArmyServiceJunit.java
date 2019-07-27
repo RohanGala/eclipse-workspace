@@ -20,7 +20,7 @@ public class ArmyServiceJunit {
 	ArmyServiceImpl loadSoldierData() {
 		ArmyServiceImpl armyServiceImpl = new ArmyServiceImpl();
 
-		try (BufferedReader br = new BufferedReader(new FileReader("../ArmyService/src/Data.properties"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("../ArmyService/src/com/armyservice/junit/Data.properties"))) {
 		
 			String line = br.readLine();
 
