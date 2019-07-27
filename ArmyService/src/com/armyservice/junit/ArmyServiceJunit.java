@@ -20,12 +20,8 @@ public class ArmyServiceJunit {
 	ArmyServiceImpl loadSoldierData() {
 		ArmyServiceImpl armyServiceImpl = new ArmyServiceImpl();
 
-<<<<<<< HEAD:ArmyService/src/ArmyServiceJunit.java
 		try (BufferedReader br = new BufferedReader(new FileReader("../ArmyService/src/Data.properties"))) {
-=======
-		try (BufferedReader br = new BufferedReader(
-				new FileReader("/home/rohangala/Documents/git Java programs/eclipse-workspace/ArmyService/src/com/armyservice/junit/Data.properties"))) {
->>>>>>> 5d2503110ec966fae79fc030007e9653399c1745:ArmyService/src/com/armyservice/junit/ArmyServiceJunit.java
+		
 			String line = br.readLine();
 
 			while (line != null) {
