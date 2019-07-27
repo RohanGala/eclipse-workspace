@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class ArmyServiceImpl implements ArmyService {
 
@@ -15,7 +16,14 @@ public class ArmyServiceImpl implements ArmyService {
 		soldier.setName(name);
 		soldier.setId(id);
 		if (supervisorId == 0) {
-
+			for (Entry<Integer, Soldier> entry : mngrEmpMap.entrySet()) {
+				Soldier s = entry.getValue();
+				if(s.getSupervisorId() == 0) {
+					throw new Exception("Only one Army General Allowed");
+				}
+			}
+			
+			
 		} else if (supervisorId != 0 && mngrEmpMap.containsKey(supervisorId)) {
 			Soldier supervisor = mngrEmpMap.get(supervisorId);
 			if (supervisor.getAllSubordinates() == null)
@@ -35,6 +43,7 @@ public class ArmyServiceImpl implements ArmyService {
 		if (mngrEmpMap.containsKey(id)) {
 			return mngrEmpMap.get(id).getName();
 		}
+		
 		return null;
 
 	}
@@ -61,14 +70,16 @@ public class ArmyServiceImpl implements ArmyService {
 				supervisorOfSoldierToBeRemoved.getAllSubordinates().addAll(soldierToBeRemoved.getAllSubordinates());
 				supervisorOfSoldierToBeRemoved.getAllSubordinates().remove(Integer.valueOf(id));
 
+			}
 				for (Integer subSoldiers : soldierToBeRemoved.getAllSubordinates()) {
 					if (mngrEmpMap.containsKey(subSoldiers)) {
 						Soldier subOrdinateSoldier = mngrEmpMap.get(subSoldiers);
 						subOrdinateSoldier.setSupervisorId(soldierToBeRemoved.getSupervisorId());
+						mngrEmpMap.put(subSoldiers, subOrdinateSoldier);
 					}
 				}
 
-			}
+			
 
 			mngrEmpMap.remove(id);
 		} else {

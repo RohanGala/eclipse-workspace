@@ -1,60 +1,108 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map.Entry;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ArmyServiceJunit {
 
-	@Test
-	void test() throws NumberFormatException, Exception {
-		// fail("Not yet implemented");
-		String str = "Junit is working fine";
-		assertEquals("Junit is working fine", str);
+	ArmyServiceImpl loadSoldierData() {
 		ArmyServiceImpl armyServiceImpl = new ArmyServiceImpl();
-		//
 
-		try (BufferedReader br = new BufferedReader(
-				new FileReader("/home/ehfl/eclipse-workspace/ArmyService/src/Data.properties"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("../ArmyService/src/Data.properties"))) {
 			String line = br.readLine();
 
 			while (line != null) {
 				String[] a = line.split(",");
-				armyServiceImpl.add(Integer.valueOf(a[0]), a[1], Integer.valueOf(a[2]));
+				assertEquals(Integer.valueOf(a[0]),
+						armyServiceImpl.add(Integer.valueOf(a[0]), a[1], Integer.valueOf(a[2])));
 				line = br.readLine();
 			}
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			fail("Unable to Read File");
+		} catch (Exception ex) {
+			fail("Cannot add Soldier as Supervisor does not exist");
 		}
-		System.out.println(armyServiceImpl.mngrEmpMap);
-		for (Entry<Integer, Soldier> entry: armyServiceImpl.mngrEmpMap.entrySet()) 
-        { 
-			Integer id = entry.getKey(); 
-			//System.out.print("ID:"+id +" ->");
-			Soldier soldier = entry.getValue(); 
-			System.out.println(id+"("+soldier.getName()+")" +" ->" +soldier.getAllSubordinates());
-			
-			
-			
-			
-        }
-		armyServiceImpl.remove(2);
-		for (Entry<Integer, Soldier> entry: armyServiceImpl.mngrEmpMap.entrySet()) 
-        { 
-			Integer id = entry.getKey(); 
-			//System.out.print("ID:"+id +" ->");
-			Soldier soldier = entry.getValue(); 
-			System.out.println(id+"("+soldier.getName()+")" +" ->" +soldier.getAllSubordinates());
-			
-			
-			
-			
-        }
-		
+		return armyServiceImpl;
+	}
+
+	@Test
+	void addSoldiers() throws NumberFormatException, Exception {
+
+		loadSoldierData();
 
 	}
+
+	@Test
+	void addSoldierswithtwoArmyGenerals() throws NumberFormatException, Exception {
+
+		ArmyServiceImpl armyServiceImpl = loadSoldierData();
+		Assertions.assertThrows(Exception.class, () -> armyServiceImpl.add(100, "ROHAN", 0));
+
+	}
+
+	@Test
+	void getSoldier() throws NumberFormatException, Exception {
+
+		ArmyServiceImpl armyServiceImpl = loadSoldierData();
+		if (armyServiceImpl.get(7) == null) {
+			fail("Soldier not found with id 7");
+		}
+		assertEquals("G", armyServiceImpl.get(7));
+
+	}
+
+	@Test
+	void getSoldierNotFound() {
+
+		ArmyServiceImpl armyServiceImpl = loadSoldierData();
+
+		assertEquals(null, armyServiceImpl.get(90));
+
+	}
+
+	@Test
+	void removeSupervisor() throws NumberFormatException, Exception {
+
+		ArmyServiceImpl armyServiceImpl = loadSoldierData();
+		armyServiceImpl.remove(1);
+		assertEquals(null, armyServiceImpl.get(1));
+		assertEquals(0, armyServiceImpl.mngrEmpMap.get(2).getSupervisorId());
+
+	}
+
+	@Test
+	void removeSoldier() throws NumberFormatException, Exception {
+
+		ArmyServiceImpl armyServiceImpl = loadSoldierData();
+		armyServiceImpl.remove(2);
+		assertEquals(null, armyServiceImpl.get(2));
+
+	}
+
+	@Test
+	void removeSoldierWhichDoesNotExist() throws NumberFormatException, Exception {
+
+		ArmyServiceImpl armyServiceImpl = loadSoldierData();
+		Assertions.assertThrows(Exception.class, () -> armyServiceImpl.remove(90));
+
+	}
+
+	@Test
+	void getAllSubordinates() throws NumberFormatException, Exception {
+
+		ArmyServiceImpl armyServiceImpl = loadSoldierData();
+		assertEquals(new ArrayList<String>(Arrays.asList("C", "D", "E")), armyServiceImpl.getSubordinates(2));
+
+	}
+
+	
 
 }
