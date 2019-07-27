@@ -40,7 +40,7 @@ public class ArmyServiceImpl implements ArmyService {
 			supervisor.getAllSubordinates().add(id);
 		} else {
 			log.error("Supervisor Does not exist");
-			return 0;
+			return -1;
 		}
 
 		mngrEmpMap.put(id, soldier);

@@ -29,9 +29,7 @@ public class ArmyServiceJunit {
 			}
 		} catch (IOException ex) {
 			fail("Unable to Read File");
-		} catch (Exception ex) {
-			fail("Cannot add Soldier as Supervisor does not exist");
-		}
+		} 
 		return armyServiceImpl;
 	}
 
@@ -39,6 +37,16 @@ public class ArmyServiceJunit {
 	void addSoldiers() throws NumberFormatException, Exception {
 
 		loadSoldierData();
+
+	}
+	
+	
+	@Test
+	void addSoldiersWithSuperVisorNotPresent() throws NumberFormatException, Exception {
+
+		ArmyServiceImpl armyServiceImpl = loadSoldierData();
+		assertEquals(-1, armyServiceImpl.add(88, "SAMEER", 55));
+
 
 	}
 
