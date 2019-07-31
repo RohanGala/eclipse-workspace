@@ -1,1 +1,7 @@
 ../.metadata/
+/bin/
+/bin/*
+../.metadata/*
+.metadata/
+.metadata/*
+*.txt
