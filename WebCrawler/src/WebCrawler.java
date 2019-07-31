@@ -21,7 +21,7 @@ public class WebCrawler implements WebCrawlerHandler {
 
     @Override
     public void queueLink(String link) throws Exception {
-        startNewThread(link);
+        submitTask(link);
     }
 
     @Override
@@ -41,12 +41,12 @@ public class WebCrawler implements WebCrawlerHandler {
         return visitedLinks.contains(s);
     }
 
-    private void startNewThread(String link) throws Exception {
+    private void submitTask(String link) throws Exception {
         execService.execute(new URLFinder(link, this));
     }
 
     private void startCrawling() throws Exception {
-        startNewThread(this.url);
+        submitTask(this.url);
     }
 
     /**
