@@ -2,6 +2,8 @@ package com.armyservice.service;
 
 import java.util.List;
 
+import com.armyservice.entity.Soldier;
+
 public interface ArmyService {
 	int add(int id, String name, int supervisorId); // create a new soldier.
 
@@ -11,4 +13,6 @@ public interface ArmyService {
 
 	void remove(int id); // Remove a soldier. subordinates will be assigned to the removed soldier's
 							// supervisor.
+
+	Soldier getArmyGeneral();  //get the army general
 }
