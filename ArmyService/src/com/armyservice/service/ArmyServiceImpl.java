@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.armyservice.entity.Soldier;
 import com.armyservice.repository.SoldierDTO;
 
 public class ArmyServiceImpl implements ArmyService {
 
-	private static final Logger log = LoggerFactory.getLogger(ArmyServiceImpl.class);
-	SoldierDTO soldierDTO = new SoldierDTO();
+	public SoldierDTO soldierDTO = new SoldierDTO();
 
 	@Override
 	public int add(int id, String name, int supervisorId) {
@@ -75,6 +71,12 @@ public class ArmyServiceImpl implements ArmyService {
 	@Override
 	public void remove(int id) throws Exception {
 
+		if (soldierDTO.getMngrEmpMap().containsKey(id) && soldierDTO.getArmyGeneral() != null &&  soldierDTO.getArmyGeneral().getId() == id) {
+			if(soldierDTO.getArmyGeneral().getAllSubordinates() != null && soldierDTO.getArmyGeneral().getAllSubordinates().size() > 1) {
+				throw new IllegalArgumentException("Cant remove the Soldier as Soldier is Army General and since it has 2 subordinates there cant be 2 Army Genral");
+			}
+		}
+		
 		if (soldierDTO.getMngrEmpMap().containsKey(id)) {
 			Soldier soldierToBeRemoved = soldierDTO.getMngrEmpMap().get(id);
 			if (soldierDTO.getMngrEmpMap().containsKey(soldierToBeRemoved.getSupervisorId())) {
@@ -83,6 +85,10 @@ public class ArmyServiceImpl implements ArmyService {
 				supervisorOfSoldierToBeRemoved.addSubordinates(soldierToBeRemoved.getAllSubordinates());
 				supervisorOfSoldierToBeRemoved.removeSubordinates(Integer.valueOf(id));
 
+			}
+			else if(soldierDTO.getArmyGeneral() != null && soldierDTO.getArmyGeneral().getId() == id) {
+				soldierDTO.setArmyGeneral(soldierDTO.getMngrEmpMap()
+						.get(soldierToBeRemoved.getAllSubordinates().get(0)));
 			}
 			for (Integer subSoldiers : soldierToBeRemoved.getAllSubordinates()) {
 				if (soldierDTO.getMngrEmpMap().containsKey(subSoldiers)) {
@@ -93,7 +99,6 @@ public class ArmyServiceImpl implements ArmyService {
 
 			soldierDTO.getMngrEmpMap().remove(id);
 		} else {
-			log.error("Soldier Does not exist");
 			throw new IllegalArgumentException("Soldier Does not exist");
 		}
 	}
