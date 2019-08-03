@@ -1,5 +1,6 @@
 package com.armyservice.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Soldier {
@@ -40,7 +41,25 @@ public class Soldier {
 	public void setAllSubordinates(List<Integer> allSubordinates) {
 		this.allSubordinates = allSubordinates;
 	}
-	
-	
+
+	public void addSubordinates(List<Integer> list) {
+
+		if (getAllSubordinates() == null)
+			setAllSubordinates(new ArrayList<>());
+		for (Integer soldierId : list) {
+			getAllSubordinates().add(soldierId);
+		}
+
+	}
+
+	public void removeSubordinates(Integer... soldierIds) throws Exception {
+		for (Integer soldierId : soldierIds) {
+			if (getAllSubordinates().contains(soldierId)) {
+				getAllSubordinates().remove(soldierId);
+			} else {
+				throw new Exception("cannot Remove Subordinate as Subordinate does not exist");
+			}
+		}
+	}
 
 }

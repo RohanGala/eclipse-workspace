@@ -11,7 +11,7 @@ public interface ArmyService {
 
 	List<String> getSubordinates(int id); // return the names of subordinates
 
-	void remove(int id); // Remove a soldier. subordinates will be assigned to the removed soldier's
+	void remove(int id) throws Exception; // Remove a soldier. subordinates will be assigned to the removed soldier's
 							// supervisor.
 
 	Soldier getArmyGeneral();  //get the army general
